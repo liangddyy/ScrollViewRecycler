@@ -24,11 +24,11 @@ namespace ScrollRecycler
         protected int createCount; //创建的ITEM数量
         protected int rectWidth; //列表宽度
         protected int rectHeight; //列表高度
-        protected int listCount; //列表总的需要显示的数量，外部给
-        private int showCount; //当前实际显示的数量(小于或等于createCount)
-        private int lastStartIndex; //记录上次的初始序号
-        private int startIndex; //显示开始序号
-        private int endIndex; //显示结束序号
+        protected int listCount;
+        private int showCount;
+        private int lastStartIndex;
+        private int startIndex;
+        private int endIndex;
 
         private Dictionary<int, Transform> dicItems = new Dictionary<int, Transform>(); //item对应的序号
         private Vector3 curItemParentPos = Vector3.zero;
@@ -49,14 +49,14 @@ namespace ScrollRecycler
                 InitData();
             }
 
-            listCount = count; // item 最大数量
+            listCount = count;
             onRecycleGetItem = recycleGetAction;
             itemParent.transform.localPosition = Vector2.zero;
 
             SetVertHeightOrHorWid(listCount);
 
             itemParent.sizeDelta = new Vector2(rectWidth, rectHeight);
-            showCount = Mathf.Min(listCount, createCount); //显示item的数量
+            showCount = Mathf.Min(listCount, createCount);
             startIndex = 0;
             dicItems.Clear();
 
@@ -66,7 +66,7 @@ namespace ScrollRecycler
                 SetItem(item, i);
             }
 
-            ShowListCount(itemParent, showCount); //显示多少个
+            ShowListCount(itemParent, showCount);
         }
 
         /// <summary>
@@ -89,8 +89,6 @@ namespace ScrollRecycler
                 return;
             }
 
-            //计算起始的终止序号
-            //--如果数量小于遮罩正常状态下能显示的总量
             if (count <= createCount)
             {
                 startIndex = 0;

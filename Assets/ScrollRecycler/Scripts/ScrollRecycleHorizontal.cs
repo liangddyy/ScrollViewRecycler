@@ -13,7 +13,7 @@ namespace ScrollRecycler
 
         protected override void SetVertHeightOrHorWid(int count)
         {
-            columnSum = count / rowCount + (count % rowCount > 0 ? 1 : 0); //计算有多少行，用于计算出总高度
+            columnSum = count / rowCount + (count % rowCount > 0 ? 1 : 0);
             rectWidth = Mathf.Max(0, columnSum * itemWidth + (columnSum - 1) * offsetX);
         }
 
@@ -32,7 +32,7 @@ namespace ScrollRecycler
             if (value <= itemWidth + _spreadWidth)
                 return 0;
             var scrollWidth = gameObject.GetComponent<RectTransform>().sizeDelta.x;
-            if (value >= itemParent.sizeDelta.x - scrollWidth - _spreadWidth) //拉到底部了
+            if (value >= itemParent.sizeDelta.x - scrollWidth - _spreadWidth) 
             {
                 if (listCount <= createCount)
                     return 0;

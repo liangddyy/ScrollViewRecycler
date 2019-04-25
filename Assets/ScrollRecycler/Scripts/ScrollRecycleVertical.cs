@@ -4,7 +4,7 @@ namespace ScrollRecycler
 {
     public class ScrollRecycleVertical : ScrollRecycleBase
     {
-        private int rowSum; //总共多少行
+        private int rowSum;
 
         protected override void SetVertWidOrHorHeightOnOffset()
         {
@@ -17,11 +17,6 @@ namespace ScrollRecycler
             rectHeight = Mathf.Max(0, rowSum * itemHeight + (rowSum - 1) * offsetY);
         }
 
-        /// <summary>
-        ///     item对应位置
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
         protected override Vector2 GetPos(int index)
         {
             var spread = 0;
