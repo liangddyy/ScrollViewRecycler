@@ -4,7 +4,7 @@ using ScrollRecycler;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemTest : RecycleItemBase
+public class ItemTest : ItemRender
 {
     public Text TestContent;
 

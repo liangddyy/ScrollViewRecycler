@@ -8,7 +8,7 @@ namespace ScrollRecycler
     [RequireComponent(typeof(ScrollRect))]
     public abstract class ScrollRecycleBase : MonoBehaviour
     {
-        public RecycleItemBase PrefItem; //克隆体
+        public ItemRender PrefItem; //克隆体
 
         [SerializeField] protected int itemWidth = 50; //单元格宽
         [SerializeField] protected int itemHeight = 50; //单元格高
@@ -206,7 +206,7 @@ namespace ScrollRecycler
             dicItems[index] = item;
             item.localPosition = GetPos(index);
             item.name = index.ToString();
-            item.GetComponent<RecycleItemBase>().RefreshView(onRecycleGetItem(index));
+            item.GetComponent<ItemRender>().RefreshView(onRecycleGetItem(index));
         }
 
         /// <summary>
