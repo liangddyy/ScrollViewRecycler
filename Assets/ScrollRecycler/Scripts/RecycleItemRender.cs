@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace ScrollRecycler
 {
-    public class ItemRender : MonoBehaviour
+    public class RecycleItemRender : MonoBehaviour
     {
-        public virtual void RefreshView(IRecycleNode data)
+        public virtual void RefreshView(IRecycleData data)
         {
             // data as yours object.
         }
     }
 
 
-    public interface IRecycleNode
+    public interface IRecycleData
     {
     }
 }

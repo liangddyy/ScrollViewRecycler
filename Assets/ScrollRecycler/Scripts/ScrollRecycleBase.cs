@@ -8,8 +8,9 @@ namespace ScrollRecycler
     [RequireComponent(typeof(ScrollRect))]
     public abstract class ScrollRecycleBase : MonoBehaviour
     {
-        public ItemRender PrefItem; //克隆体
+        public RecycleItemRender PrefItem;
 
+        [SerializeField] private bool useItemSize;
         [SerializeField] protected int itemWidth = 50; //单元格宽
         [SerializeField] protected int itemHeight = 50; //单元格高
         [Header("显示行列数")] [SerializeField] protected int rowCount = 2;
@@ -193,6 +194,8 @@ namespace ScrollRecycler
             item.name = index.ToString();
             item.SetParent(itemParent);
             item.localScale = Vector3.one;
+            var rect = item.GetComponent<RectTransform>();
+            if (rect != null) rect.sizeDelta = new Vector2(itemWidth, itemHeight);
             return item;
         }
 
@@ -206,7 +209,7 @@ namespace ScrollRecycler
             dicItems[index] = item;
             item.localPosition = GetPos(index);
             item.name = index.ToString();
-            item.GetComponent<ItemRender>().RefreshView(onRecycleGetItem(index));
+            item.GetComponent<RecycleItemRender>().RefreshView(onRecycleGetItem(index));
         }
 
         /// <summary>
@@ -236,8 +239,10 @@ namespace ScrollRecycler
         /// <param name="height">item长</param>
         /// <param name="column"></param>
         /// <param name="row">一个列表最多能显示多少行（元素）</param>
-        public void SetMargin(int width, int height, int column, int row)
+        /// <param name="isUseItemSize"></param>
+        public void SetMargin(int width, int height, int column, int row, bool isUseItemSize = false)
         {
+            useItemSize = isUseItemSize;
             itemWidth = width;
             itemHeight = height;
             columnCount = column;
@@ -280,7 +285,11 @@ namespace ScrollRecycler
             rec.anchorMin = new Vector2(0, 1);
             rec.anchorMax = new Vector2(0, 1);
             rec.pivot = new Vector2(0, 1);
-
+            if (useItemSize)
+            {
+                itemWidth = (int)rec.sizeDelta.x;
+                itemHeight =(int)rec.sizeDelta.y;
+            }
             isInited = true;
         }
 
@@ -320,5 +329,5 @@ namespace ScrollRecycler
         #endregion
     }
 
-    public delegate IRecycleNode RecycleGetItem(int index);
+    public delegate IRecycleData RecycleGetItem(int index);
 }

@@ -4,17 +4,17 @@ using ScrollRecycler;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemTest : ItemRender
+public class ItemTest : RecycleItemRender
 {
     public Text TestContent;
 
-    public override void RefreshView(IRecycleNode data)
+    public override void RefreshView(IRecycleData data)
     {
         TestContent.text = (data as TestItemData).Value.ToString();
     }
 }
 
-public class TestItemData : IRecycleNode
+public class TestItemData : IRecycleData
 {
     public int Value;
 }
